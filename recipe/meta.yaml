@@ -1,7 +1,5 @@
 {% set name = "asyncpgsa" %}
-{% set version = "0.23.0" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "a24fc00e6a072efbcbfa0397b151ecb38870f4d37dadc0a27509f99bde795994" %}
+{% set version = "0.24.0" %}
 
 package:
   name: {{ name|lower }}
@@ -10,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  {{ hash_type }}: {{ hash_value }}
+  sha256: a6fdb83cd0d5716800489243e5a7691404c0cceaf008fcfe7939e7579e890f4b
 
 build:
   number: 0
@@ -23,11 +21,11 @@ requirements:
     - setuptools
     # Project imports itself to find out version during build
     # time which results into importing runtime dependencies
-    - asyncpg >=0.15.0,<0.17
+    - asyncpg >=0.16.0,<0.17
     - sqlalchemy
   run:
     - python
-    - asyncpg >=0.15.0,<0.17
+    - asyncpg >=0.16.0,<0.17
     - sqlalchemy
 
 test:
