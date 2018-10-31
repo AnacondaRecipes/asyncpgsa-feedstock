@@ -1,5 +1,5 @@
 {% set name = "asyncpgsa" %}
-{% set version = "0.24.0" %}
+{% set version = "0.25.2" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a6fdb83cd0d5716800489243e5a7691404c0cceaf008fcfe7939e7579e890f4b
+  sha256: 8c835271a7f15f7f47fb2c6c1fb3a1bcc6d738133ad330cfd219e92f71a78001
 
 build:
   number: 0
