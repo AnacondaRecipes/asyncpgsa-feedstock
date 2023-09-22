@@ -1,21 +1,17 @@
 {% set name = "asyncpgsa" %}
 {% set version = "0.27.1" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "32e9ad376caf969d606800a977f044dda2ed946eb10f3c87dac2690ae897f6aa" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  {{ hash_type }}: {{ hash_value }}
+  sha256: 32e9ad376caf969d606800a977f044dda2ed946eb10f3c87dac2690ae897f6aa
 
 build:
-  number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv "
-  skip: True  # [py2k]
+  number: 1
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -24,16 +20,20 @@ requirements:
     # Project imports itself to find out version during build
     # time which results into importing runtime dependencies
     - asyncpg
-    - sqlalchemy
+    - sqlalchemy <2
   run:
     - python
-    - asyncpg
-    - sqlalchemy
+    - asyncpg >=0.22.0
+    - sqlalchemy <2
 
 test:
   imports:
     - asyncpgsa
     - asyncpgsa.testing
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/canopytax/asyncpgsa
@@ -47,8 +47,7 @@ about:
     implementation of PostgreSQL server binary protocol for use with Python's
     asyncio framework.
   dev_url: https://github.com/CanopyTax/asyncpgsa
-  doc_url: http://asyncpgsa.readthedocs.io
-  doc_source_url: https://github.com/CanopyTax/asyncpgsa/blob/master/docs/index.rst
+  doc_url: https://asyncpgsa.readthedocs.io
 
 extra:
   recipe-maintainers:
